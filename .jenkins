@@ -4,7 +4,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/TuanFaied/3806-Ahamadh.git' 
+                git branch: 'main', url: 'https://github.com/TuanFaied/3806-Ahamadh.git'
+
             }
         }
 
