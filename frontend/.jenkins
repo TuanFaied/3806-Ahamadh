@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clone Repository') {
+            steps {
+                git 'https://github.com/your-username/your-repo.git' 
+            }
+        }
+
+        stage('Build and Deploy with Docker Compose') {
+            steps {
+                script {
+                    
+                    sh 'docker-compose down' 
+                    sh 'docker-compose build' 
+                    sh 'docker-compose up -d' 
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "Deployment Successful"
+        }
+
+        failure {
+            echo "Deployment Failed"
+            sh 'docker-compose logs' 
+        }
+    }
+}
